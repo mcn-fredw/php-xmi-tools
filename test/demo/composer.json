@@ -1,0 +1,21 @@
+{
+    "name": "DataSchema",
+    "description": "Symfony API test.",
+    "type": "REST Application",
+    "require": {
+        "doctrine/orm": "^2.5",
+        "symfony/yaml": "^3.4",
+        "symfony/event-dispatcher": "^3.4",
+        "symfony/lock": "^3.4",
+        "symfony/process": "^3.4",
+        "symfony/dependency-injection": "^3.4",
+        "symfony/config": "^3.4",
+        "symfony/proxy-manager-bridge": "^3.4",
+        "symfony/expression-language": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyProject\\": "src/"
+        }
+    }
+}

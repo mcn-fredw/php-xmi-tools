@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec php src/Main.php --project-dir=`pwd`/test/demo --xmi-file=`pwd`/test/dbstruct.xmi

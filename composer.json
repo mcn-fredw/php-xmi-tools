@@ -1,0 +1,28 @@
+{
+    "name": "XMITools",
+    "description": "PHP Tools to generate classes from XMI UML.",
+    "type": "project",
+    "require": {
+        "phpunit/phpunit": "*",
+        "symfony/yaml": "*",
+        "symfony/console": "^3.4"
+    },
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "mcn-fredw",
+            "email": "fred.woods.se@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "XMITools\\": "src/",
+            "Library\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "XMITools\\test\\": "test/"
+        }
+    }
+}

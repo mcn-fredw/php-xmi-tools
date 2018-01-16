@@ -1,0 +1,24 @@
+# map of name to something used to create an instance for name.
+#
+module-collector: 'XMITools\ModuleCollector::createFromXmi'
+xmi-doc-reader: 'XMITools\XMIReader::createFromFile'
+module-factory: 'XMITools\BaseModuleBuilder::create'
+datatype-module-builder: 'XMITools\DatatypeBuilder'
+php-type-module-builder: 'XMITools\PHPTypeBuilder'
+other-party-module-builder: 'XMITools\OtherPartyBuilder'
+interface-module-builder: 'XMITools\InterfaceBuilder'
+class-module-builder: 'XMITools\ClassBuilder'
+trait-module-builder: 'XMITools\TraitBuilder'
+doctrine-entity-module-builder: 'XMITools\DoctrineEnitityBuilder'
+doctrine-repository-module-builder: 'XMITools\DoctrineRepositoryBuilder'
+
+interface-method-builder: 'XMITools\InterfaceMethodBuilder::readFromXMI'
+class-method-builder: 'XMITools\ConcreteMethodBuilder::readFromXMI'
+class-method-class: 'XMITools\ConcreteMethodBuilder'
+method-parameter-builder: 'XMITools\ParameterBuilder::readFromXMI'
+attribute-builder: 'XMITools\AttributeBuilder::readFromXMI'
+attribute-class: 'XMITools\AttributeBuilder'
+template-parameter-builder: 'XMITools\TemplateParameterBuilder::readFromXMI'
+
+interface-reflection-method-reader: 'XMITools\InterfaceMethodBuilder'
+class-reflection-method-reader: 'XMITools\ConcreteMethodBuilder'
