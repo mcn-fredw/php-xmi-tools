@@ -20,8 +20,12 @@ see **bin/test-run.sh** for an example.
 
 ## Features
 
-- Emitted source code is psr-2 compliant.
 - Tabs in Umbrello documentation/code are converted to 4 spaces.
+- Add a Datatype **mixed** to document, but not type hint mixed types.
+- Return types that begin with **?** have limited support for nullable return types.
+Current code will not try to resolve relative name space imports and hints for Datatypes.
+You will need to create a second class or interface to represent custom interfaces and
+classes as a nullable return type.
 - Add a Datatype **@array** to use as PHP's array type in type hints.
 - Add a Datatype **@const** with the **implementation** visibility
 for constants.
@@ -30,12 +34,16 @@ for special class attributes/properties that won't appear in the source code.
 - Add a Datatype **@test** with the **implementation** visibility
 for tests (work in progress).
 - Class templates are treated as name space import hints.
-The type is the hint, the ignored name just needs to be unique.
+The type is the name space import, the name is the type hint.
 - Setting the stereotype of a class or interface to **php-type**
 will cause the name space import and type hint to work correctly for an PHP type (i.e. PDO, Exception, ...).
 No source code is emitted for classes and interfaces with the stereotype "php-type'.
 - Setting the stereotype of a class to **trait** will cause the class's source code to be emitted as a PHP trait.
 Attach traits to classes using the Implements generalization (class implements trait).
+Attaching an interface to a trait will allow any method code added in Umbrello to be emitted in the trait.
+- Code added to an interface method will be emitted in any directly implementing traits or classes.
+- Code generator makes an attempt to merge code from pre-existing modules.
+    - Constants are not merged, still have to work out type issues with the PHP reflection API.
 - Setting the stereotype of a class to **doctrine-entity**
 will cause the source code generator to look for special annotations and attribute/property comments
 to generate doctrine YAML files for doctrine entity metadata.
