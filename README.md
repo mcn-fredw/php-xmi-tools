@@ -31,6 +31,7 @@ classes as a nullable return type.
 for constants.
 - Add a Datatype **@annotation** with the **implementation** visibility
 for special class attributes/properties that won't appear in the source code.
+Intended use is to pass information to specialty builders (i.e. DoctrineEntityBuilder).
 - Add a Datatype **@test** with the **implementation** visibility
 for tests (work in progress).
 - Class templates are treated as name space import hints.
