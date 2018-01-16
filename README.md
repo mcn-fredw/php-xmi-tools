@@ -38,7 +38,7 @@ for tests (work in progress).
 The type is the name space import, the name is the type hint.
 - Setting the stereotype of a class or interface to **php-type**
 will cause the name space import and type hint to work correctly for an PHP type (i.e. PDO, Exception, ...).
-No source code is emitted for classes and interfaces with the stereotype "php-type'.
+No source code is emitted for classes and interfaces with the stereotype **php-type**.
 - Setting the stereotype of a class to **trait** will cause the class's source code to be emitted as a PHP trait.
 Attach traits to classes using the Implements generalization (class implements trait).
 Attaching an interface to a trait will allow any method code added in Umbrello to be emitted in the trait.
