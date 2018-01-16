@@ -11,7 +11,7 @@ symfony/yaml
 
 ## Usage
 
-**php** **src/Main.php** **--project-dir=**directory **--xmi-file=**xmi-file
+**php** **src/Main.php** **--project-dir=** directory **--xmi-file=** xmi-file
 
 - directory is the path to the base project directory containing your composer.json file.
 - xmi-file is the path to your project XMI UML model.
