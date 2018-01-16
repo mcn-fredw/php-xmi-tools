@@ -7,7 +7,7 @@
         "symfony/yaml": "*",
         "symfony/console": "^3.4"
     },
-    "license": "BSD-3-Clause",
+    "license": "MIT",
     "authors": [
         {
             "name": "mcn-fredw",
@@ -16,8 +16,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "XMITools\\": "src/",
-            "Library\\": "lib/"
+            "XMITools\\": "src/"
         }
     },
     "autoload-dev": {

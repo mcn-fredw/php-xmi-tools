@@ -6,7 +6,7 @@ use ReflectionClassConstant;
 
 /**
  * Class AttributeBuilder
- * Builder for class a attribute.
+ * Builder for a class attribute.
  */
 class AttributeBuilder extends ClassElementBuilder implements
     Interfaces\AttributeBuilder,
