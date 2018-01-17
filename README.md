@@ -16,7 +16,7 @@ symfony/yaml
 - directory is the path to the base project directory containing your composer.json file.
 - xmi-file is the path to your project XMI UML model.
 
-see **bin/test-run.sh** for an example.
+see **bin/test-run** for an example.
 
 ## Features
 
@@ -68,7 +68,11 @@ Any text between **@doctrine-yaml** lines is emitted in the fields section of th
 
 ## History
 
-Initial version 1.0.0
+- 1.0.1
+    - Fix for reading constants and attributes from source.
+    - Prevent trait code from being imported in to using classes when reading existing source code.
+- 1.0.0
+    - Initial version.
 
 ## License
 
