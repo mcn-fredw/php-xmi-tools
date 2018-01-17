@@ -47,6 +47,49 @@ class CodeFormatter
     }
 
     /**
+     * Gets source code string representation of a PHP array.
+     * @param array $in
+     * @return string
+     */
+    public static function arrayToSourceCodeString(array $in)
+    {
+        $tmp = [];
+        $lead = 0;
+        foreach (explode("\n", var_export($in, true)) as $line) {
+            $indent = strspn($line, ' ') / 2;
+            $line = ltrim($line);
+            switch ($line) {
+                case '),':
+                    $tmp[] = sprintf(
+                        '%s],',
+                        str_repeat(self::TAB, $indent + $lead)
+                    );
+                    break;
+                case ')':
+                    $tmp[] = sprintf(
+                        '%s]',
+                        str_repeat(self::TAB, $indent + $lead)
+                    );
+                    break;
+                case 'array (':
+                    $line = '[';
+                    if (count($tmp)) {
+                        $line = sprintf('%s[', ltrim(array_pop($tmp)));
+                    }
+                default:
+                    $tmp[] = sprintf(
+                        '%s%s',
+                        str_repeat(self::TAB, $indent + $lead),
+                        $line
+                    );
+                    break;
+            }
+            $lead = 1;
+        }
+        return implode("\n", $tmp);
+    }
+
+    /**
      * Create a bitmap for a set of bool values.
      * @param bool $args Multiple bool arguments.
      * @return int

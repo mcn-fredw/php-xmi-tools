@@ -190,6 +190,10 @@ class ModuleCollector implements
     ) {
         if ($importer) {
             foreach ($class->getMethods() as $reflection) {
+                $fn = $this->pathForName($importer->fullName());
+                if ($reflection->getFileName() != $fn) {
+                    continue;
+                }
                 $importer->importSourceCodeMethod(
                     $reflection,
                     $this,
