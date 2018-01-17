@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMI verified="false" xmi.version="1.2" timestamp="2018-01-15T13:11:50" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
+<XMI verified="false" xmi.version="1.2" timestamp="2018-01-17T03:49:09" xmlns:UML="http://schema.omg.org/spec/UML/1.3">
  <XMI.header>
   <XMI.documentation>
    <XMI.exporter>umbrello uml modeller http://umbrello.kde.org</XMI.exporter>
@@ -101,7 +101,7 @@
               <UML:Generalization xmi.idref="Vm8FMq24JPf3"/>
              </UML:GeneralizableElement.generalization>
              <UML:Classifier.feature>
-              <UML:Attribute visibility="implementation" isSpecification="false" xmi.id="NnVbplJwYNiF" type="0sKexoA7nJyW" comment="An array constant." initialValue="[ 'x' => 'X', 'y' => 'Y']" name="ARRAY_CONST"/>
+              <UML:Attribute visibility="implementation" isSpecification="false" xmi.id="NnVbplJwYNiF" type="0sKexoA7nJyW" comment="An array constant." initialValue="['x' => 'X', 'y' => 'Y', 'z' => [ 'a' => 'A', ['end']]]" name="ARRAY_CONST"/>
               <UML:Attribute visibility="implementation" isSpecification="false" ownerScope="classifier" xmi.id="nlGx9FPEBtsA" type="0sKexoA7nJyW" comment="A string constant." initialValue="&quot;string constant value&quot;" name="SOME_CONSTANT"/>
               <UML:Attribute visibility="implementation" isSpecification="false" xmi.id="BIlX3E4DfC3g" type="laxt4AC68b9Q" comment="id:&#xa;&#x9;id:&#xa;&#x9;&#x9;type: integer&#xa;&#x9;&#x9;generator:&#xa;&#x9;&#x9;&#x9;strategy: AUTO" initialValue="src/orm/mapping" name="@yaml"/>
               <UML:Attribute visibility="implementation" isSpecification="false" xmi.id="uxeobnmqS2KZ" type="laxt4AC68b9Q" initialValue="MyProject\Models\Persisted\CompanyRepository" name="@repository"/>
@@ -127,6 +127,11 @@
              <UML:Classifier.feature>
               <UML:Attribute visibility="implementation" isSpecification="false" xmi.id="Z6b9EJ6agbyX" type="laxt4AC68b9Q" comment="Specifies where the yaml maaping file goes." initialValue="src/orm/mapping" name="@yaml"/>
               <UML:Attribute visibility="implementation" isSpecification="false" xmi.id="EZ6yxqzizXWH" type="laxt4AC68b9Q" comment="The entity this repository handles." initialValue="Company" name="@entity"/>
+              <UML:Attribute visibility="protected" isSpecification="false" xmi.id="d4aJATfDajr3" type="D8lYrx7ZSKpl" initialValue="['x' => 'X', 'y' => 'Y', 'z' => [ 'a' => 'A', ['end']]]" name="arrayTest2"/>
+              <UML:Attribute visibility="protected" isSpecification="false" xmi.id="DRqUlFRwpC4J" type="D8lYrx7ZSKpl" initialValue="[]" name="arrayTest1"/>
+              <UML:Attribute visibility="protected" isSpecification="false" xmi.id="1XyyLK481mxZ" type="Be8EGA5g3qYu" initialValue="''" name="stringTest1"/>
+              <UML:Attribute visibility="protected" isSpecification="false" xmi.id="IadecnFdZvLs" type="Be8EGA5g3qYu" initialValue="'a string'" name="stringTest2"/>
+              <UML:Attribute visibility="protected" isSpecification="false" xmi.id="Y0gviLbPnKmr" type="vbUKkn40CyL1" initialValue="true" name="boolTest"/>
              </UML:Classifier.feature>
             </UML:Class>
             <UML:Package visibility="public" isSpecification="false" namespace="6ldSU20VAu6L" isAbstract="false" isLeaf="false" isRoot="false" xmi.id="UsIEHgYkXBVJ" name="Traits">
@@ -187,14 +192,14 @@
      </UML:Namespace.ownedElement>
      <XMI.extension xmi.extender="umbrello">
       <diagrams>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="Database" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="532" canvaswidth="1061" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffffc0" zoom="100" xmi.id="LF7JHy5xm7Dd" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="Database" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="603" canvaswidth="852" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffffc0" zoom="100" xmi.id="LF7JHy5xm7Dd" documentation="" showscope="1" snapgrid="0" showatts="1" type="1">
         <widgets>
          <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="151" showattsigs="601" showstereotype="1" y="-188" showattributes="0" font="Sans Serif,9,-1,0,50,0,0,0,0,0" drawascircle="0" localid="1U8lewmD8vxI" width="87" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="frrSeyFGWS6r" showscope="1" height="42" showopsigs="601"/>
          <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="248" showattsigs="601" showstereotype="1" y="-72" showattributes="0" font="Sans Serif,9,-1,0,50,0,0,0,0,0" drawascircle="0" localid="vB9EZlyjXaEr" width="87" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="pN3grQI18VUZ" showscope="1" height="42" showopsigs="601"/>
          <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-408" showattsigs="601" showstereotype="1" y="-193" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="oY2GlVtoPYkM" width="493" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="BFQITs2m5JF1" showscope="1" height="105" showopsigs="601"/>
          <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-344" showattsigs="601" showstereotype="1" y="-61" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="56pHjNknzoGl" width="498" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="P4ePZyqv2YZS" showscope="1" height="77" showopsigs="601"/>
          <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="178" showattsigs="601" showstereotype="1" y="47" showattributes="0" font="Sans Serif,9,-1,0,50,0,0,0,0,0" drawascircle="0" localid="0ynmTsMIfE2f" width="177" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="V3bcP4M88ueV" showscope="1" height="63" showopsigs="601"/>
-         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-359" showattsigs="601" showstereotype="1" y="46" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="HXtnrsSADhLF" width="427" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="N75sccItl9C4" showscope="1" height="96" showopsigs="601"/>
+         <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-361" showattsigs="601" showstereotype="1" y="47" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="HXtnrsSADhLF" width="525" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="N75sccItl9C4" showscope="1" height="166" showopsigs="601"/>
          <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="148" showattsigs="601" showstereotype="1" y="-390" showattributes="0" font="Sans Serif,9,-1,0,50,0,0,0,0,0" drawascircle="0" localid="zOZtJZ7yUdk6" width="101" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="j0iE8iFnYTqe" showscope="1" height="63" showopsigs="601"/>
          <classwidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="1" x="-387" showattsigs="601" showstereotype="1" y="-388" showattributes="1" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="RnGl5zz4p52u" width="341" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="G0U4kf6k9Q9p" showscope="1" height="63" showopsigs="601"/>
          <interfacewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" showoperations="1" textcolor="#000000" usesdiagramusefillcolor="0" showpubliconly="0" showpackage="0" x="269" showattsigs="601" showstereotype="1" y="-293" showattributes="0" font="Sans Serif,9,-1,0,50,0,0,0,0,0" drawascircle="0" localid="LTtgZmC0t0V8" width="175" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="ACA4kycaOltc" showscope="1" height="63" showopsigs="601"/>
@@ -216,7 +221,7 @@
          </assocwidget>
          <assocwidget indexa="1" indexb="1" usesdiagramusefillcolor="0" widgetaid="N75sccItl9C4" usesdiagramfillcolor="0" fillcolor="#ffff00" linecolor="none" seqnum="" totalcounta="2" xmi.id="VCVJdAe9tebo" widgetbid="V3bcP4M88ueV" totalcountb="2" type="511" textcolor="none" usefillcolor="1" linewidth="none" font="Sans Serif,9,-1,0,50,0,0,0,0,0">
           <linepath layout="Polyline">
-           <startpoint startx="68" starty="101"/>
+           <startpoint startx="164" starty="101"/>
            <endpoint endx="178" endy="101"/>
           </linepath>
          </assocwidget>
@@ -282,7 +287,7 @@
          </assocwidget>
         </associations>
        </diagram>
-       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="1" showpackage="1" showpubliconly="0" showstereotype="1" name="states" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="446" canvaswidth="545" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffffc0" zoom="100" xmi.id="rIEStDQIGGQd" documentation="" showscope="1" snapgrid="0" showatts="1" type="5">
+       <diagram showopsig="1" linecolor="#ff0000" snapx="25" showattribassocs="1" snapy="25" linewidth="0" showattsig="1" textcolor="#000000" isopen="0" showpackage="1" showpubliconly="0" showstereotype="1" name="states" font="Sans Serif,9,-1,0,50,0,0,0,0,0" canvasheight="446" canvaswidth="545" localid="-1" snapcsgrid="0" showgrid="0" showops="1" griddotcolor="#d3d3d3" backgroundcolor="#ffffff" usefillcolor="1" fillcolor="#ffffc0" zoom="100" xmi.id="rIEStDQIGGQd" documentation="" showscope="1" snapgrid="0" showatts="1" type="5">
         <widgets>
          <statewidget linecolor="none" usesdiagramfillcolor="0" linewidth="0" textcolor="#000000" usesdiagramusefillcolor="0" x="-585" showstereotype="1" y="-290" font="Sans Serif,9,-1,0,50,0,0,0,0,0" localid="EaEFXBQs26XA" statename="State" statetype="0" width="10" isinstance="0" usefillcolor="1" fillcolor="#ffffc0" xmi.id="YVt4danjDYvz" documentation="" height="10">
           <Activities/>
@@ -411,7 +416,7 @@
   </UML:Model>
  </XMI.content>
  <XMI.extensions xmi.extender="umbrello">
-  <docsettings viewid="LF7JHy5xm7Dd" uniqueid="d8wYkQDhoQK9" documentation=""/>
+  <docsettings viewid="LF7JHy5xm7Dd" uniqueid="Y0gviLbPnKmr" documentation=""/>
   <listview>
    <listitem open="1" type="800" id="Views">
     <listitem open="1" type="821" id="Component View"/>
@@ -454,8 +459,13 @@
         <listitem open="1" type="813" id="N75sccItl9C4">
          <listitem open="0" type="814" id="EZ6yxqzizXWH"/>
          <listitem open="0" type="814" id="Z6b9EJ6agbyX"/>
+         <listitem open="0" type="814" id="DRqUlFRwpC4J"/>
+         <listitem open="0" type="814" id="d4aJATfDajr3"/>
+         <listitem open="0" type="814" id="Y0gviLbPnKmr"/>
          <listitem open="0" type="816" id="undbCDzZnlyW"/>
          <listitem open="0" type="816" id="tk5zSCG1esXy"/>
+         <listitem open="0" type="814" id="1XyyLK481mxZ"/>
+         <listitem open="0" type="814" id="IadecnFdZvLs"/>
         </listitem>
         <listitem open="1" type="813" id="P4ePZyqv2YZS">
          <listitem open="0" type="814" id="DmHa3PCSqzy7"/>
@@ -503,6 +513,7 @@
   <codegeneration>
    <codegenerator language="C++">
     <sourcecode value="if (! $id) {&#xa;&#x9;throw new Ouch();&#xa;}&#xa;return $this->findOneBy(['id', $id]);" id="QNVQKlU4u7KA"/>
+    <sourcecode value="return new Company();" id="biBgEZcNHEMd"/>
     <sourcecode value="return $this->id;" id="VwiFJL0AbqhH"/>
     <sourcecode value="$this->id = $id;" id="sin72zuy5fgC"/>
     <sourcecode value="return $this->name;" id="DPDU8AnNOp0i"/>

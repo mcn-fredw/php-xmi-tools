@@ -12,6 +12,7 @@ use ReflectionClassConstant;
 class ClassBuilder extends InterfaceBuilder implements
     Interfaces\MethodImporter,
     Interfaces\SourceCodeAttributeImporter,
+    Interfaces\SourceCodeConstantImporter,
     Interfaces\SourceCodeTraitImporter
 {
     const TYPE_NAME = 'class';
@@ -212,15 +213,13 @@ class ClassBuilder extends InterfaceBuilder implements
             return;
         }
         $name = $reflection->getName();
-        $export = $reflection->export($this->fullName(), $name, true);
         if (! isset($this->constants[$name])) {
-            $class = FactoryService::get('attribute-class');
+            $class = FactoryService::get('constant-class');
             $this->constants[$name] = new $class();
             $this->constants[$name]->name($name);
         }
         $this->constants[$name]->readFromReflectionConstant(
             $reflection,
-            $export,
             $this,
             $store
         );

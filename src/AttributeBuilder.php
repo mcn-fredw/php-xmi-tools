@@ -3,6 +3,8 @@ namespace XMITools;
 
 use ReflectionProperty;
 use ReflectionClassConstant;
+use UnexpectedValueException;
+use Error;
 
 /**
  * Class AttributeBuilder
@@ -10,6 +12,7 @@ use ReflectionClassConstant;
  */
 class AttributeBuilder extends ClassElementBuilder implements
     Interfaces\AttributeBuilder,
+    Interfaces\RefelectionConstantReader,
     Interfaces\ReflectionPropertyReader
 {
     use Traits\FormatHint;
@@ -219,6 +222,39 @@ class AttributeBuilder extends ClassElementBuilder implements
     /**
      * {@inheritDoc}
      */
+    public function readFromReflectionConstant(
+        ReflectionClassConstant $reflection,
+        Interfaces\ReflectionTypeHintResolver $resolver,
+        Interfaces\ModuleStore $store
+    ) {
+        $this->name($reflection->getName());
+        $this->visibility('implementation');
+        $this->hint('@const');
+        $value = '';
+        try {
+            $value = $reflection->getValue();
+        } catch (Error $er) {
+            throw new UnexpectedValueException('weird error');
+        }
+        switch (true) {
+            case is_array($value);
+                $this->value(
+                    CodeFormatter::arrayToSourceCodeString($value)
+                );
+                break;
+            default;
+                $this->value(var_export($value, true));
+                break;
+        }
+        $this->reflected = array_merge(
+            (array)(self::TAB . $reflection->getDocComment()),
+            $this->constantDeclaration()
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function readFromReflectionProperty(
         ReflectionProperty $reflection,
         array &$defaults,
@@ -229,7 +265,17 @@ class AttributeBuilder extends ClassElementBuilder implements
         $this->isStatic($reflection->isStatic());
         $this->name($reflection->getName());
         if (isset($defaults[$this->name()]))  {
-            $this->value($defaults[$this->name()]);
+            $value = $defaults[$this->name()];
+            switch (true) {
+                case is_array($value);
+                    $this->value(
+                        CodeFormatter::arrayToSourceCodeString($value)
+                    );
+                    break;
+                default;
+                    $this->value(var_export($value, true));
+                    break;
+            }
         }
         if ($reflection->isPublic()) {
             $this->visibility('public');
@@ -240,9 +286,8 @@ class AttributeBuilder extends ClassElementBuilder implements
         if ($reflection->isPrivate()) {
             $this->visibility('private');
         }
-        $doc = self::TAB . $reflection->getDocComment();
         $this->reflected = array_merge(
-            (array)$doc,
+            (array)(self::TAB . $reflection->getDocComment()),
             $this->propertyDeclaration()
         );
     }
