@@ -2,10 +2,10 @@
 namespace XMITools;
 
 /**
- * Class PHPTypeBuilder
- * Data type builder for PHP/Pear/Pecl classes and interfaces.
+ * Class ThirdPartyBuilder
+ * Data type builder for 3rd party classes and interfaces.
  */
-class PHPTypeBuilder extends DatatypeBuilder
+class ThirdPartyBuilder extends DatatypeBuilder
 {
     /**
      * {@inheritDoc}
@@ -20,7 +20,7 @@ class PHPTypeBuilder extends DatatypeBuilder
      */
     public function importFor($owning)
     {
-        return $this->name();
+        return $this->fullName();
     }
 
     /**
