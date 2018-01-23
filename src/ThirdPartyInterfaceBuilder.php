@@ -2,19 +2,11 @@
 namespace XMITools;
 
 /**
- * Class ThirdPartyBuilder
- * Data type builder for 3rd party classes and interfaces.
+ * Class ThirdPartyInterfaceBuilder
+ * Data type builder for 3rd party interfaces.
  */
-class ThirdPartyBuilder extends DatatypeBuilder
+class ThirdPartyInterfaceBuilder extends DatatypeBuilder
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function gatherElements(Interfaces\XMIReader $reader)
-    {
-        return;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -26,7 +18,7 @@ class ThirdPartyBuilder extends DatatypeBuilder
     /**
      * {@inheritDoc}
      */
-    public function isClass()
+    public function isInterface()
     {
         return true;
     }
