@@ -1,28 +1,24 @@
 <?php
 namespace XMITools;
 
-class PHPTypeBuilder extends DatatypeBuilder
+/**
+ * Class ThirdPartyInterfaceBuilder
+ * Data type builder for 3rd party interfaces.
+ */
+class ThirdPartyInterfaceBuilder extends DatatypeBuilder
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function gatherElements(Interfaces\XMIReader $reader)
-    {
-        return;
-    }
-
     /**
      * {@inheritDoc}
      */
     public function importFor($owning)
     {
-        return $this->name();
+        return $this->fullName();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function isClass()
+    public function isInterface()
     {
         return true;
     }
