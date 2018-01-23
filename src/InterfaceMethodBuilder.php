@@ -80,15 +80,16 @@ class InterfaceMethodBuilder extends MethodBuilder implements
     {
         $n = count($this->parameters);
         $proto = [];
-        for ($i = 0; $i < $n; $i++) {
+        foreach ($this->parameters as $param) {
+            $n -= 1;
             $frmt = '%s%s';
-            if (($i + 1) < $n) {
+            if (0 < $n) {
                 $frmt = '%s%s,';
             }
             $proto[] = sprintf(
                 $frmt,
                 str_repeat(self::TAB, $indent),
-                $this->parameters[$i]->prototype()
+                $param->prototype()
             );
         }
         return $proto;
