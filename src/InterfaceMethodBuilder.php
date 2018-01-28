@@ -64,10 +64,16 @@ class InterfaceMethodBuilder extends MethodBuilder implements
     {
         $result = [];
         foreach ($this->parameters as $param) {
-            $result[] = $param->docblock();
+            foreach (explode("\n", $param->docblock()) as $line) {
+                $result[] = $line;
+            }
         }
         if ($this->hint) {
-            $result[] = '@return ' . $this->hint;
+            $hint = $this->hint();
+            if (0 === strpos($hint, '@')) {
+                $hint = substr($hint, 1);
+            }
+            $result[] = '@return ' . $hint;
         }
         return $result;
     }
