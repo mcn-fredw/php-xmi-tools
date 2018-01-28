@@ -12,7 +12,7 @@ class ThirdPartyClassBuilder extends ThirdPartyInterfaceBuilder
      */
     public function isClass()
     {
-        return false;
+        return true;
     }
 
     /**
