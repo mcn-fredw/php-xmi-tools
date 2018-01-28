@@ -45,15 +45,18 @@ class InterfaceMethodBuilder extends MethodBuilder implements
         if (0 === strpos($hint, '@')) {
             $hint = substr($hint, 1);
         }
+        $format = '): %s;';
+        if ($this->nullableHint) {
+            $format = '): ?%s;';
+        }
         if (0 == strlen($hint)) {
             /* no hint */
-            return ');';
-        }
-        if ('mixed' == $hint || 2 == count(explode('|', $hint))) {
+            $format = ');';
+        } elseif ('mixed' == $hint || 2 == count(explode('|', $hint))) {
             /* mixed type can't be hinted */
-            return ');';
+            $format = ');';
         }
-        return sprintf('): %s;', $hint);
+        return sprintf($format, $hint);
     }
 
     /**
@@ -64,10 +67,19 @@ class InterfaceMethodBuilder extends MethodBuilder implements
     {
         $result = [];
         foreach ($this->parameters as $param) {
-            $result[] = $param->docblock();
+            foreach (explode("\n", $param->docblock()) as $line) {
+                $result[] = $line;
+            }
         }
         if ($this->hint) {
-            $result[] = '@return ' . $this->hint;
+            $hint = $this->hint();
+            if (0 === strpos($hint, '@')) {
+                $hint = substr($hint, 1);
+            }
+            if ($this->nullableHint) {
+                $hint = sprintf("null|%s", $hint);
+            }
+            $result[] = '@return ' . $hint;
         }
         return $result;
     }

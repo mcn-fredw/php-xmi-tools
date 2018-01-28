@@ -10,6 +10,7 @@ abstract class MethodBuilder extends ClassElementBuilder implements
 {
     protected $code;
     protected $isAbstract;
+    protected $nullableHint = false;
     protected $parameters = [];
 
     /**
@@ -57,7 +58,17 @@ abstract class MethodBuilder extends ClassElementBuilder implements
         Interfaces\ModuleStore $store,
         Interfaces\TypeHintResolver $resolver
     ) {
+        $typeXmiId = $this->hint;
         parent::importTypes($store, $resolver);
+        if ($typeXmiId) {
+            $module = $store->getModule($typeXmiId);
+            if ($module) {
+                $this->nullableHint = (
+                   $module->isInterface()
+                   || $module->isClass()
+                );
+            }
+        }
         foreach ($this->parameters as $parameter) {
             $parameter->importTypes($store, $resolver);
         }

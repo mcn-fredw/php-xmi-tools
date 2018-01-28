@@ -68,19 +68,22 @@ class DoctrineEnitityBuilder extends ClassBuilder
      */
     protected function beginDoctrineYaml()
     {
+        $table = $this->annotations['@table']->value();
+        $repo = $this->annotations['@repository']->value();
+        if (false === strpos($repo, "\\")) {
+            $repo = sprintf("%s\\%s", $this->ns, $repo);
+        }
         $lines = [
-            $this->fullName() . ':' ,
-            self::TAB . 'type: entity',
-            self::TAB . 'table: '
-                . $this->annotations['@table']->value(),
-            self::TAB . 'repositoryClass: '
-                . $this->annotations['@repository']->value()
+            sprintf('%s:', $this->fullName()),
+            sprintf('%stype: entity', self::TAB),
+            sprintf('%stable: %s', self::TAB, $table),
+            sprintf('%srepositoryClass: %s', self::TAB, $repo)
         ];
         $yaml = explode("\n", $this->annotations['@yaml']->comment());
         foreach ($yaml as $line) {
-            $lines[] = self::TAB . $line;
+            $lines[] = sprintf('%s%s', self::TAB, $line);
         }
-        $lines[] = self::TAB . 'fields:';
+        $lines[] = sprintf('%sfields:', self::TAB);
         return $lines;
     }
 
