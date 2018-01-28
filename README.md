@@ -22,10 +22,9 @@ see **bin/test-run** for an example.
 
 - Tabs in Umbrello documentation/code are converted to 4 spaces.
 - Use a Datatype **mixed** to document, but not type hint mixed types.
-- Return types that begin with **?** have limited support for nullable return types.
-Current code will not try to resolve relative name space imports and hints for Datatypes.
-You will need to create a second class or interface to represent custom interfaces and
-classes as a nullable return type.
+- Setting a method's return type to an interface or class will case the type
+hint to be prefixed with **?**, indicating the method may return null.
+For other return types, you will need to specify the **?** in the Datatype name.
 - Use a Datatype **@array** to use as PHP's array type in type hints.
 - Declare an attribute/property with a Datatype **@const** and a visibility of **implementation**
 to make the attribute/property a constant.
