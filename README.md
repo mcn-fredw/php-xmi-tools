@@ -51,10 +51,10 @@ for an third party interface.
     - No source code is emitted for interfaces with the stereotype **3rd-party-interface**.
 - Setting the stereotype of a class to **trait** will cause the class's source code
 to be emitted as a PHP trait.
-Attach traits to classes using the Implements generalization (class implements trait).
-Attaching an interface to a trait will allow any method code added in Umbrello
-to be emitted in the trait.
-- Declaring at least one attribute of type **@test** to a class or trait will cause
+    - Attach traits to classes or traits using the **Implements** generalization
+    (class implements trait).
+- Code added to an interface method will be emitted in any directly implementing traits or classes.
+- Declaring at least one attribute of type **@test** in a class or trait will cause
 the code generator to create a test class for the class/trait.
     - The test class will be named using the class or trait name with **Test** appended.
     - The test class name space is based on the class or trait name, with **Tests**
@@ -65,7 +65,6 @@ the code generator to create a test class for the class/trait.
     for all directly defined attributes in the class or trait.
         - @todo use https://github.com/mcn-fredw/mock-from-yaml-php for test generators.
         - @todo generate accessor tests for indirectly defined attributes.
-- Code added to an interface method will be emitted in any directly implementing traits or classes.
 - Setting the stereotype of a class to **doctrine-entity**
 will cause the source code generator to look for special annotations and attribute comments
 to generate doctrine YAML files for doctrine entity metadata.
