@@ -116,10 +116,7 @@ class AttributeBuilder extends ClassElementBuilder implements
      */
     public function isAnnotation()
     {
-        return (
-            'implementation' == $this->visibility
-            && '@annotation' == $this->hint
-        );
+        return ('@annotation' == $this->hint);
     }
 
     /**
@@ -127,10 +124,7 @@ class AttributeBuilder extends ClassElementBuilder implements
      */
     public function isConst()
     {
-        return (
-            'implementation' == $this->visibility
-            && '@const' == $this->hint
-        );
+        return ('@const' == $this->hint);
     }
 
     /**
@@ -138,10 +132,7 @@ class AttributeBuilder extends ClassElementBuilder implements
      */
     public function isTest()
     {
-        return (
-            'implementation' == $this->visibility
-            && '@test' == $this->hint
-        );
+        return ('@test' == $this->hint);
     }
 
     /**

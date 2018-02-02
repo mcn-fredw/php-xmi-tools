@@ -26,3 +26,5 @@ template-parameter-builder: 'XMITools\TemplateParameterBuilder::readFromXMI'
 
 interface-reflection-method-reader: 'XMITools\InterfaceMethodBuilder'
 class-reflection-method-reader: 'XMITools\ConcreteMethodBuilder'
+
+test-class-builder: 'XMITools\TestClassBuilder::createTestClass'

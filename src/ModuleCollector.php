@@ -230,10 +230,12 @@ class ModuleCollector implements
      * @param Interfaces\TestGenerator $importer
      */
     protected function callTestGenerator(
-        Interfaces\TestGenerator $generator = null
+        Interfaces\ModuleBuilder $builder,
+        Interfaces\Testable $testable = null
     ) {
-        if ($generator) {
-            $generator->generateTests($this);
+        if ($testable  && $testable->hasTests()) {
+            $factory = FactoryService::get('test-class-builder');
+            call_user_func($factory, $builder, $this);
         }
     }
 
@@ -497,7 +499,7 @@ class ModuleCollector implements
     protected function resolveTestGenerator(
         Interfaces\ModuleBuilder $builder
     ) {
-        $this->callTestGenerator($builder->getTestGenerator());
+        $this->callTestGenerator($builder, $builder->getTestable());
     }
 
     /**

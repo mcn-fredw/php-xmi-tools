@@ -45,6 +45,10 @@ abstract class BaseModuleBuilder extends Module implements
         }
         $this->gatherElements($reader);
         $store->saveModule($this);
+        echo sprintf(
+            "Created module for %s\n",
+            $this->fullName()
+        );
     }
 
     /**
@@ -138,9 +142,9 @@ abstract class BaseModuleBuilder extends Module implements
     /**
      * {@inheritDoc}
      */
-    public function getTestGenerator()
+    public function getTestable()
     {
-        if ($this instanceof Interfaces\TestGenerator) {
+        if ($this instanceof Interfaces\Testable) {
             return $this;
         }
         return null;

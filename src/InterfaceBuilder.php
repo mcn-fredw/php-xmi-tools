@@ -268,6 +268,7 @@ class InterfaceBuilder extends BaseModuleBuilder implements
                 ''
             ],
             $this->moduleImports(),
+            $this->moduleStubs(),
             $this->moduleDocblock(),
             $this->moduleDeclaration(),
             [
@@ -281,6 +282,15 @@ class InterfaceBuilder extends BaseModuleBuilder implements
                 '}',
             ]
         );
+    }
+
+    /**
+     * Builds module's stub classes and traits section of module source code.
+     * @return array
+     */
+    protected function moduleStubs()
+    {
+        return [];
     }
 
     /**

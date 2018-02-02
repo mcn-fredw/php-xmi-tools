@@ -13,7 +13,8 @@ class ClassBuilder extends InterfaceBuilder implements
     Interfaces\MethodImporter,
     Interfaces\SourceCodeAttributeImporter,
     Interfaces\SourceCodeConstantImporter,
-    Interfaces\SourceCodeTraitImporter
+    Interfaces\SourceCodeTraitImporter,
+    Interfaces\Testable
 {
     const TYPE_NAME = 'class';
     const METHOD_BUILER_NAME = 'class-method-builder';
@@ -138,6 +139,14 @@ class ClassBuilder extends InterfaceBuilder implements
             }
         }
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasTests()
+    {
+        return (0 < count($this->tests));
     }
 
     /**
