@@ -7,6 +7,7 @@ namespace XMITools;
  */
 class TestClassBuilder extends ClassBuilder
 {
+    /** array of stub classes/traits */
     protected $stubs = [];
 
     /**
@@ -39,7 +40,9 @@ class TestClassBuilder extends ClassBuilder
         $this->ns(implode("\\", $parts));
         $this->stereotype('');
         $this->isAbstract(false);
-        
+        /* extend php unit test class */
+        /* for each test*/
+        /* call method creator for test type (first part of value) */
     }
 
     /**
