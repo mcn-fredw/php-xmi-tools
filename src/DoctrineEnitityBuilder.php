@@ -7,46 +7,100 @@ class DoctrineEnitityBuilder extends ClassBuilder
         . DIRECTORY_SEPARATOR
         . "%s"
         . DIRECTORY_SEPARATOR
-        . "%s.dcm.yaml";
+        . "%s.dcm.yml";
 
     /**
+     * Appends @doctring-yaml section of attribute comments
+     * to lines array.
+     * @param array &$base Reference to base yaml lines for entity.
+     * @param array &$fields Reference to fields list yaml lines.
+     * @param array &$src Reference to attributes list.
+     * @param Interfaces\ModuleStore $store For module lookup.
      */
     protected function appendAttributeFields(
-        array &$lines,
+        array &$base,
+        array &$fields,
         array &$src,
         Interfaces\ModuleStore $store
     ) {
+        $scanStr = str_repeat(self::TAB, 3);
         foreach ($src as $attrib) {
             $cmt = explode("\n", $attrib->comment());
             $keep = false;
             $named = false;
+            $fiedDef = [];
             while (count($cmt)) {
                 $line = array_shift($cmt);
                 if (false !== strpos($line, '@doctrine-yaml')) {
                     $keep ^= true;
                 } elseif ($keep) {
                     if (! $named) {
-                        $lines[] = sprintf(
+                        $fiedDef[] = sprintf(
                             "%s%s:",
                             str_repeat(self::TAB, 2),
                             $attrib->name()
                         );
                         $named = true;
                     }
-                    $lines[] = sprintf(
+                    $fiedDef[] = sprintf(
                         "%s%s",
                         str_repeat(self::TAB, 3),
                         $line
                     );
                 }
             }
+            $fieldsLen = count($fiedDef);
+            if (0 == $fieldsLen) {
+                continue;
+            }
+            /* append to fields or replace base */
+            $n = count($base);
+            $i = 0;
+            while ($i < $n) {
+                if ($fiedDef[0] == $base[$i]) {
+                    /* found field def in id: section */
+                    break;
+                }
+                $i += 1;
+            }
+            if ($i == $n) {
+                /* field def not in id: section */
+                array_splice(
+                    $fields,
+                    $fieldsLen,
+                    0,
+                    $fiedDef
+                );
+                continue;
+            }
+            $j = $i + 1;
+            while ($j < $n) {
+                if (false === strpos($base[$j], $scanStr)) {
+                    /* found next field def in base */
+                    break;
+                }
+                $j += 1;
+            }
+            /* replace field def in base */
+            array_splice(
+                $base,
+                $i,
+                $j - $i,
+                $fiedDef
+            );
         }
     }
 
     /**
+     * Appends @doctring-yaml section of trait attribute comments
+     * to lines array.
+     * @param array &$base Reference to base yaml lines for entity.
+     * @param array &$fields Reference to fields list yaml lines.
+     * @param Interfaces\ModuleStore $store For module lookup.
      */
     protected function appendTraitFields(
-        array &$lines,
+        array &$base,
+        array &$fields,
         Interfaces\ModuleStore $store
     ) {
         foreach ($this->traits as $tKey => $tHint) {
@@ -55,7 +109,8 @@ class DoctrineEnitityBuilder extends ClassBuilder
             }
             $module = $store->getModule($tKey);
             $this->appendAttributeFields(
-                $lines,
+                $base,
+                $fields,
                 $module->attributes,
                 $store
             );
@@ -83,7 +138,6 @@ class DoctrineEnitityBuilder extends ClassBuilder
         foreach ($yaml as $line) {
             $lines[] = sprintf('%s%s', self::TAB, $line);
         }
-        $lines[] = sprintf('%sfields:', self::TAB);
         return $lines;
     }
 
@@ -116,12 +170,25 @@ class DoctrineEnitityBuilder extends ClassBuilder
             str_replace('\\', '.', $fullName)
         );
         echo "Writing entity yaml $yamlPath\n";
-        $lines = $this->beginDoctrineYaml();
-        $this->appendAttributeFields($lines, $this->attributes, $store);
-        $this->appendTraitFields($lines, $store);
+        $base = $this->beginDoctrineYaml();
+        $fields = [ sprintf('%sfields:', self::TAB) ];
+        $this->appendAttributeFields(
+            $base,
+            $fields,
+            $this->attributes,
+            $store
+        );
+        $this->appendTraitFields($base, $fields, $store);
         $paths->createDirectories($yamlPath);
         $fd = fopen($yamlPath, 'w');
-        foreach ($lines as $line) {
+        foreach ($base as $line) {
+            if (is_array($line)) {
+                var_dump($line);
+                throw new UnexpectedValueException("writing file $yamlPath");
+            }
+            fwrite($fd, "$line\n");
+        }
+        foreach ($fields as $line) {
             if (is_array($line)) {
                 var_dump($line);
                 throw new UnexpectedValueException("writing file $yamlPath");

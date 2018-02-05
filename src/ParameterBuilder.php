@@ -12,6 +12,7 @@ class ParameterBuilder implements Interfaces\ParameterBuilder
 
     protected $comment;
     protected $hint;
+    protected $hintXmi;
     protected $name;
     protected $typeResolved = false;
     protected $value;
@@ -28,6 +29,21 @@ class ParameterBuilder implements Interfaces\ParameterBuilder
         '%2$s = %3$s',
         '%1$s %2$s = %3$s'
     ];
+
+    /**
+     * {@inheritDoc}
+     */
+    public function copy()
+    {
+        $dst = new static();
+        $dst->xmiId = $this->xmiId;
+        $dst->name = $this->name;
+        $dst->hint = $this->hint;
+        $dst->hintXmi = $this->hintXmi;
+        $dst->comment = $this->comment;
+        $dst->value = $this->value;
+        return $dst;
+    }
 
     /**
      * {@inheritDoc}
@@ -68,8 +84,42 @@ class ParameterBuilder implements Interfaces\ParameterBuilder
     }
 
     /**
-     * Gets name for this parameter.
-     * @return string
+     * {@inheritDoc}
+     */
+    public function hint()
+    {
+        return $this->hint;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hintXmi()
+    {
+        return $this->hintXmi;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function importTypes(
+        Interfaces\ModuleStore $store,
+        Interfaces\TypeHintResolver $resolver
+    ) {
+        if ($this->typeResolved) {
+            return;
+        }
+        $this->typeResolved = true;
+        if ($this->hintXmi) {
+            $hint = $resolver->resolveTypeHint($store, $this->hintXmi);
+            if($hint) {
+                $this->hint = $hint;
+            }
+        }
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function name()
     {
@@ -92,25 +142,6 @@ class ParameterBuilder implements Interfaces\ParameterBuilder
     /**
      * {@inheritDoc}
      */
-    public function importTypes(
-        Interfaces\ModuleStore $store,
-        Interfaces\TypeHintResolver $resolver
-    ) {
-        if ($this->typeResolved) {
-            return;
-        }
-        $this->typeResolved = true;
-        if ($this->hint) {
-            $hint = $resolver->resolveTypeHint($store, $this->hint);
-            if($hint) {
-                $this->hint = $hint;
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public static function readFromXMI(
         Interfaces\XMIReader $reader,
         Interfaces\ModuleBuilder $builder
@@ -119,6 +150,7 @@ class ParameterBuilder implements Interfaces\ParameterBuilder
         $parameter->xmiId = $reader->xmiId();
         $parameter->name = $reader->shortName();
         $parameter->hint = $reader->type();
+        $parameter->hintXmi = $parameter->hint;
         $parameter->comment = $reader->comment();
         $parameter->value = $reader->value();
         return $parameter;

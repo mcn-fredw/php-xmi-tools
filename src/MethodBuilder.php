@@ -46,7 +46,10 @@ abstract class MethodBuilder extends ClassElementBuilder implements
         parent::copy($source);
         if ($source instanceof self) {
             $this->isAbstract($source->isAbstract());
-            $this->parameters($source->parameters());
+            $this->parameters = [];
+            foreach ($source->parameters() as $k => $p) {
+                $this->parameters[$k] = $p->copy();
+            }
             $this->code($source->code());
         }
     }
@@ -58,10 +61,9 @@ abstract class MethodBuilder extends ClassElementBuilder implements
         Interfaces\ModuleStore $store,
         Interfaces\TypeHintResolver $resolver
     ) {
-        $typeXmiId = $this->hint;
         parent::importTypes($store, $resolver);
-        if ($typeXmiId) {
-            $module = $store->getModule($typeXmiId);
+        if ($this->hintXmi) {
+            $module = $store->getModule($this->hintXmi);
             if ($module) {
                 $this->nullableHint = (
                    $module->isInterface()
@@ -94,7 +96,8 @@ abstract class MethodBuilder extends ClassElementBuilder implements
         if ('return' != $kind) {
             return false;
         }
-        $this->hint($reader->type());
+        $this->hint = $reader->type();
+        $this->hintXmi = $this->hint;
         return true;
     }
 

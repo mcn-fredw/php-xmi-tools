@@ -13,7 +13,8 @@ class ClassBuilder extends InterfaceBuilder implements
     Interfaces\MethodImporter,
     Interfaces\SourceCodeAttributeImporter,
     Interfaces\SourceCodeConstantImporter,
-    Interfaces\SourceCodeTraitImporter
+    Interfaces\SourceCodeTraitImporter,
+    Interfaces\Testable
 {
     const TYPE_NAME = 'class';
     const METHOD_BUILER_NAME = 'class-method-builder';
@@ -110,6 +111,23 @@ class ClassBuilder extends InterfaceBuilder implements
     /**
      * {@inheritDoc}
      */
+    public function findImportedMethod(
+        $methodKey,
+        Interfaces\ModuleStore $store
+    ) {
+        foreach (array_keys($this->traits) as $import) {
+            $module = $store->getModule($import);
+            $method = $module->findMethod($methodKey, $store, false);
+            if ($method) {
+                return $method;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function gatherElements(
         Interfaces\XMIReader $reader
     ) {
@@ -128,16 +146,19 @@ class ClassBuilder extends InterfaceBuilder implements
         $methodKey,
         Interfaces\ModuleStore $store
     ) {
-        if (isset($this->methods[$methodKey])) {
-            return true;
-        }
-        foreach (array_keys($this->traits) as $trait) {
-            $module = $store->getModule($trait);
-            if ($module->hasMethod($methodKey, $store)) {
-                return true;
-            }
+        $method = $this->findMethod($methodKey, $store);
+        if ($method) {
+            return (! ($this->isTrait() && $method->isAbstract()));
         }
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function hasTests()
+    {
+        return (0 < count($this->tests));
     }
 
     /**

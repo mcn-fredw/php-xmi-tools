@@ -8,7 +8,7 @@ use ReflectionClass;
 /**
  * class ModuleCollector
  * Implementation of module collector,
- * module store +,
+ * module store,
  * and path translator.
  */
 class ModuleCollector implements
@@ -230,10 +230,12 @@ class ModuleCollector implements
      * @param Interfaces\TestGenerator $importer
      */
     protected function callTestGenerator(
-        Interfaces\TestGenerator $generator = null
+        Interfaces\ModuleBuilder $builder,
+        Interfaces\Testable $testable = null
     ) {
-        if ($generator) {
-            $generator->generateTests($this);
+        if ($testable && $testable->hasTests()) {
+            $factory = FactoryService::get('test-class-builder');
+            call_user_func($factory, $builder, $this);
         }
     }
 
@@ -302,6 +304,19 @@ class ModuleCollector implements
         $name = str_replace('\\', DIRECTORY_SEPARATOR, $name);
         $path = $this->projectPath . DIRECTORY_SEPARATOR . $name . '.php';
         return $this->createDirectories($path);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findModule($fullName)
+    {
+        foreach ($this->modules as $module) {
+            if ($module->fullName() == $fullName) {
+                return $module;
+            }
+        }
+        return null;
     }
 
     /**
@@ -380,6 +395,12 @@ class ModuleCollector implements
                 $this->autoloaders[strrev($match)] = $value;
             }
         }
+        /* grab vendor autoloader if it exists */
+        $vendorFile = $this->projectPath . '/vendor/autoload.php';
+        if (is_file($vendorFile)) {
+            require_once($vendorFile);
+        }
+
     }
 
     /**
@@ -467,7 +488,7 @@ class ModuleCollector implements
         if (! is_file($path)) {
             return;
         }
-        $lines = file($path);
+        $lines = file($path, FILE_IGNORE_NEW_LINES);
         $class = new ReflectionClass($name);
         $this->callSourceCodeConstantImporter(
             $class,
@@ -497,7 +518,7 @@ class ModuleCollector implements
     protected function resolveTestGenerator(
         Interfaces\ModuleBuilder $builder
     ) {
-        $this->callTestGenerator($builder->getTestGenerator());
+        $this->callTestGenerator($builder, $builder->getTestable());
     }
 
     /**

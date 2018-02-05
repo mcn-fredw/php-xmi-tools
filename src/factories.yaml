@@ -8,6 +8,7 @@ php-type-module-builder: 'XMITools\PHPClassBuilder'
 php-interface-module-builder: 'XMITools\PHPInterfaceBuilder'
 3rd-party-interface-module-builder: 'XMITools\ThirdPartyInterfaceBuilder'
 3rd-party-class-module-builder: 'XMITools\ThirdPartyClassBuilder'
+3rd-party-trait-module-builder: 'XMITools\ThirdPartyTraitBuilder'
 interface-module-builder: 'XMITools\InterfaceBuilder'
 class-module-builder: 'XMITools\ClassBuilder'
 trait-module-builder: 'XMITools\TraitBuilder'
@@ -26,3 +27,5 @@ template-parameter-builder: 'XMITools\TemplateParameterBuilder::readFromXMI'
 
 interface-reflection-method-reader: 'XMITools\InterfaceMethodBuilder'
 class-reflection-method-reader: 'XMITools\ConcreteMethodBuilder'
+
+test-class-builder: 'XMITools\TestClassBuilder::createTestClass'

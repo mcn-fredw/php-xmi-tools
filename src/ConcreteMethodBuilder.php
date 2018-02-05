@@ -24,6 +24,9 @@ class ConcreteMethodBuilder extends InterfaceMethodBuilder
     protected function prototype($indent = 1)
     {
         $sig = parent::prototype($indent);
+        if ($this->isAbstract()) {
+            return $sig;
+        }
         $last = array_pop($sig);
         $last = rtrim($last, ';');
         if (false === strpos($last, '(')) {
@@ -44,17 +47,6 @@ class ConcreteMethodBuilder extends InterfaceMethodBuilder
             $sig,
             $code,
             [ self::TAB . '}' ]
-        );
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function sourceCode()
-    {
-        return array_merge(
-            $this->docblock(),
-            $this->prototype()
         );
     }
 }

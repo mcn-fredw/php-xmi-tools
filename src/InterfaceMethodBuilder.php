@@ -194,6 +194,14 @@ class InterfaceMethodBuilder extends MethodBuilder implements
     /**
      * {@inheritDoc}
      */
+    public function reflected()
+    {
+        return $this->getOrSet('reflected', ...func_get_args());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function sourceCode()
     {
         if (0 < count($this->reflected)) {
