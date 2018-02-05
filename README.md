@@ -1,7 +1,7 @@
 # php-xmi-tools
 
 PHP based tool for outputting PHP 7.x code for a Umbrello XMI file.
-Tested with Umbrello 2.14.3.
+Tested with Umbrello 2.14.3 (dev platform 4.13.30).
 
 ## Installation
 
@@ -44,13 +44,17 @@ for a PHP class (i.e. Exception).
 will cause the name space import, type hint, implements, and extends to work correctly
 for a PHP interface (i.e. ArrayAccess).
     - No source code is emitted for interfaces with the stereotype **php-interface**.
-- Setting the stereotype of a class to **3rd-party-class**
-will cause the name space import and type hint to work correctly for a third part class.
-    - No source code is emitted for classes with the stereotype **3rd-party-class**.
-- Setting the stereotype of a class or interface to **3rd-party-interface**
+- Setting the stereotype of an interface to **3rd-party-interface**
 will cause the name space import, type hint, implements, and extends to work correctly
 for a third party interface.
     - No source code is emitted for interfaces with the stereotype **3rd-party-interface**.
+- Setting the stereotype of a class to **3rd-party-class**
+will cause the name space import and type hint to work correctly for a third part class.
+    - No source code is emitted for classes with the stereotype **3rd-party-class**.
+- Setting the stereotype of a class to **3rd-party-trait**
+will cause the name space import, type hint, and use to work correctly
+for a third party trait.
+    - No source code is emitted for interfaces with the stereotype **3rd-party-trait**.
 - Setting the stereotype of a class to **trait** will cause the class's source code
 to be emitted as a PHP trait.
     - Attach traits to classes or traits using the **Implements** generalization

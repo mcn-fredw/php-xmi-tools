@@ -1,0 +1,24 @@
+#
+# first element of @test type value points to file like this.
+# file is assumed to be a name spaced name relative to TestDrivers\.
+#
+
+# full name space name of class and static method to call to build methods.
+# call signature
+#    vendor\namespace\class::factory(
+#        array(
+#            'factory' => callable 'XMITools\FactoryService::get',
+#            'class' => TestClassBuilder,
+#            'for'   => ClassOrTraitUnderTest,
+#            'test' => AttributeBuilder @test attribute,
+#            'data'  => array (driver file data array),
+#            'store' => ModuleStore,
+#            'paths' => PathTranslator
+#        )
+#    )
+# see Interfaces\TestClassBuilder for test class builder API.
+# Note: Your project name space and vendor/autoloader.php is loaded.
+# This is a side-effect of being able to merge diagram code with existing code.
+# Note: PathTranslator::pathForName() forces file names to end in .php.
+#
+builder-factory: ''

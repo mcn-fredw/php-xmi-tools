@@ -4,6 +4,13 @@ namespace XMITools\Interfaces;
 interface ModuleStore
 {
     /**
+     * Look up a module by full name.
+     * @param string $fullName Full name of module to look up.
+     * @return null|Module
+     */
+    public function findModule($fullName);
+
+    /**
      * Look up a module by MXI id.
      * @param string $id XMI id of module.
      * @return Module

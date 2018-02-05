@@ -15,6 +15,7 @@ abstract class ClassElementBuilder implements
 
     protected $comment;
     protected $hint;
+    protected $hintXmi;
     protected $isStatic;
     protected $name;
     protected $visibility;
@@ -35,6 +36,7 @@ abstract class ClassElementBuilder implements
     {
         $this->comment($source->comment());
         $this->hint($source->hint());
+        $this->hintXmi($source->hintXmi());
         $this->isStatic($source->isStatic());
         $this->name($source->name());
         $this->visibility($source->visibility());
@@ -52,14 +54,22 @@ abstract class ClassElementBuilder implements
     /**
      * {@inheritDoc}
      */
+    public function hintXmi()
+    {
+        return $this->getOrSet('hintXmi', ...func_get_args());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function importTypes(
         Interfaces\ModuleStore $store,
         Interfaces\TypeHintResolver $resolver
     ) {
-        if ($this->hint) {
-            $hint = $resolver->resolveTypeHint($store, $this->hint);
+        if ($this->hintXmi) {
+            $hint = $resolver->resolveTypeHint($store, $this->hintXmi);
             if($hint) {
-                $this->hint($hint);
+                $this->hint = $hint;
             }
         }
     }
@@ -94,6 +104,7 @@ abstract class ClassElementBuilder implements
         $element->comment($reader->comment());
         $element->visibility($reader->visibility());
         $element->isStatic($reader->isStatic());
+        $element->hintXmi($element->hint());
         return $element;
     }
 

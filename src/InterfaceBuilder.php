@@ -86,6 +86,40 @@ class InterfaceBuilder extends BaseModuleBuilder implements
     /**
      * {@inheritDoc}
      */
+    public function findImportedMethod(
+        $methodKey,
+        Interfaces\ModuleStore $store
+    ) {
+        foreach (array_keys($this->extends) as $import) {
+            $module = $store->getModule($import);
+            $method = $module->findMethod($methodKey, $store, false);
+            if ($method) {
+                return $method;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function findMethod(
+        $methodKey,
+        Interfaces\ModuleStore $store,
+        $recurse = true
+    ) {
+        if (isset($this->methods[$methodKey])) {
+            return $this->methods[$methodKey];
+        }
+        if ($recurse) {
+            return $this->findImportedMethod($methodKey, $store);
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function gatherElements(
         Interfaces\XMIReader $reader
     ) {
@@ -259,16 +293,22 @@ class InterfaceBuilder extends BaseModuleBuilder implements
      * Builds module's source code.
      * @return array
      */
-    protected function moduleSourceCode()
+    public function moduleSourceCode($isStub = false)
     {
+        $heading = [ '' ];
+        if (! $isStub) {
+            $heading = array_merge(
+                [
+                    '<?php',
+                    "namespace {$this->ns};",
+                    ''
+                ],
+                $this->moduleImports(),
+                $this->moduleStubs()
+            );
+        }
         return array_merge(
-            [
-                '<?php',
-                "namespace {$this->ns};",
-                ''
-            ],
-            $this->moduleImports(),
-            $this->moduleStubs(),
+            $heading,
             $this->moduleDocblock(),
             $this->moduleDeclaration(),
             [

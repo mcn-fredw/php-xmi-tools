@@ -80,7 +80,7 @@ interface ModuleBuilder
      * Gets test generator for module.
      * @return ?TestGenerator implementation.
      */
-    public function getTestGenerator();
+    public function getTestable();
 
     /**
      * Gets type importer for module.

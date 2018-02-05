@@ -28,6 +28,12 @@ interface ClassElementBuilder extends
     public function hint();
 
     /**
+     * Element type hint xmi id.
+     * @return string|$this
+     */
+    public function hintXmi();
+
+    /**
      * Element is static accessor.
      * @return bool|$this
      */
