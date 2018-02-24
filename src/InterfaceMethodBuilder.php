@@ -36,7 +36,7 @@ class InterfaceMethodBuilder extends MethodBuilder implements
     }
 
     /**
-     * Gets doc block section for method parameters.
+     * Gets doc block for return type.
      * @return array
      */
     protected function hintPrototype()

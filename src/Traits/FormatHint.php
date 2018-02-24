@@ -19,16 +19,23 @@ trait FormatHint
         if (0 === strpos($hint, '@')) {
             $hint = substr($hint, 1);
         }
-        if (! $isProto) {
+        if ($isProto) {
+            if (false !== strpos($hint, '|')) {
+                $hint = '';
+            }
+            if ('mixed' == $hint) {
+                $hint = '';
+            }
+            if ('resource' == $hint) {
+                $hint = '';
+            }
+        } else {
             if (0 === strpos($hint, '?')) {
                 $hint = substr($hint, 1) . '|null';
             }
             if (0 < strlen($hint) && 'null' == $this->value) {
                 $hint = $hint . '|null';
             }
-        }
-        if ($isProto && false !== strpos($hint, '|')) {
-            $hint = '';
         }
         return $hint;
     }

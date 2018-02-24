@@ -9,6 +9,11 @@ class CodeFormatter
 {
     const TAB = '    ';
     const MAX_LINE_LENGTH = 80;
+    static $metaTags = [
+        '@orm-yaml' => true,
+        '@api-yaml' => true,
+        '@perms-yaml' => true
+    ];
 
     /**
      * Adjust length of lines to be less than 80 chars if possible.
@@ -146,7 +151,7 @@ class CodeFormatter
         $keep = true;
         while (count($tmp)) {
             $str = array_shift($tmp);
-            if (0 === strpos($str, '@doctrine')) {
+            if (isset(self::$metaTags[$str])) {
                 $keep ^= true;
             } elseif ($keep) {
                 $annotations[] = $str;

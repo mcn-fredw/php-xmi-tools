@@ -9,6 +9,7 @@ abstract class ClassElementBuilder implements
     Interfaces\ClassElementBuilder
 {
     use Traits\Accessor;
+    use Traits\FormatHint;
 
     const TAB = CodeFormatter::TAB;
     const MAX_LINE_LENGTH = CodeFormatter::MAX_LINE_LENGTH;
@@ -19,6 +20,7 @@ abstract class ClassElementBuilder implements
     protected $isStatic;
     protected $name;
     protected $visibility;
+    protected $value;
     protected $xmiId;
 
     /**

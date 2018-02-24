@@ -15,7 +15,6 @@ class AttributeBuilder extends ClassElementBuilder implements
     Interfaces\RefelectionConstantReader,
     Interfaces\ReflectionPropertyReader
 {
-    use Traits\FormatHint;
     use Traits\FormatName;
 
     protected static $propertyDeclarationFormats = [
@@ -34,8 +33,6 @@ class AttributeBuilder extends ClassElementBuilder implements
         '%1$s/** @todo documentation */',
         '%1$s/** %2$s */'
     ];
-    /** Attribute value. */
-    protected $value;
     /** Reflected doc block and declaration. */
     protected $reflected = [];
 
